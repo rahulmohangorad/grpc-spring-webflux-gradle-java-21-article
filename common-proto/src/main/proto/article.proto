@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package com.kkh_chth.articles.grpc.proto;
+
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+message Article {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string content = 4;
+  google.protobuf.Timestamp publication_date = 5;
+  string category = 6;
+}
+
+service ArticleService {
+  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse);
+  rpc GetArticleById(GetArticleByIdRequest) returns (GetArticleByIdResponse);
+  rpc GetAllArticles(Empty) returns (GetAllArticlesResponse);
+  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
+  rpc DeleteArticle(DeleteArticleRequest) returns (DeleteArticleResponse);
+}
+
+message CreateArticleRequest {
+  Article article = 1;
+}
+
+message CreateArticleResponse {
+  Article article = 1;
+}
+
+message GetArticleByIdRequest {
+  int64 id = 1;
+}
+
+message GetArticleByIdResponse {
+  Article article = 1;
+}
+
+message GetAllArticlesResponse {
+  repeated Article articles = 1;
+}
+
+message UpdateArticleRequest {
+  int64 id = 1;
+  Article article = 2;
+}
+
+message UpdateArticleResponse {
+  Article article = 1;
+}
+
+message DeleteArticleRequest {
+  int64 id = 1;
+}
+
+message DeleteArticleResponse {
+  Empty response = 1;
+}
+
+message Empty {}

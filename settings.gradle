@@ -1,0 +1,4 @@
+rootProject.name = 'grpc-webflux-gradle-java-21-article'
+include 'common-proto'
+include 'grpc-service'
+

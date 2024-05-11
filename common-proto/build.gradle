@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'com.google.protobuf' version '0.9.4'
+}
+
+group = 'com.kkh_chth.articles.grpc'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.devh:grpc-server-spring-boot-starter:3.0.0.RELEASE'
+    implementation 'com.salesforce.servicelibs:reactor-grpc-stub:1.0.1'
+}
+protobuf {
+    protoc {
+        // The artifact spec for the Protobuf Compiler
+        artifact = "com.google.protobuf:protoc:3.25.1"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.31.0"
+        }
+        reactor {
+            artifact = "com.salesforce.servicelibs:reactor-grpc:1.0.1"
+        }
+    }
+    generateProtoTasks {
+        ofSourceSet("main")*.plugins {
+            grpc { }
+            reactor {}
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
