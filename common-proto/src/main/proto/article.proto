@@ -4,15 +4,11 @@ package com.kkh_chth.articles.grpc.proto;
 
 option java_multiple_files = true;
 
-import "google/protobuf/timestamp.proto";
-
 message Article {
   int64 id = 1;
   string title = 2;
   string author = 3;
-  string content = 4;
-  google.protobuf.Timestamp publication_date = 5;
-  string category = 6;
+  string category = 4;
 }
 
 service ArticleService {
@@ -60,4 +56,6 @@ message DeleteArticleResponse {
   Empty response = 1;
 }
 
-message Empty {}
+message Empty {
+  string status = 1;
+}
