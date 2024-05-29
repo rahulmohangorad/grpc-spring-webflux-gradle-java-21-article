@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/common-proto" />
+            <option value="$PROJECT_DIR$/grpc-client-service" />
             <option value="$PROJECT_DIR$/grpc-service" />
           </set>
         </option>
