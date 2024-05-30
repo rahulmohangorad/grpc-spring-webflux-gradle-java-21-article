@@ -6,9 +6,7 @@ import com.kkh_chth.articles.grpc.proto.GetAllArticlesResponse;
 import com.kkh_chth.articles.grpc.services.ArticleServiceGrpcImpl;
 import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.optional.qual.Present;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
@@ -26,5 +24,10 @@ public class ArticleController {
     public Mono<List<ArticleJson>> getAllArticles(){
         return articleServiceGrpcImpl.getAllArticle();
 
+    }
+
+    @PostMapping
+    public Mono<ArticleJson> createArticle(@RequestBody ArticleJson aarticleJson){
+        return articleServiceGrpcImpl.createArticle(aarticleJson);
     }
 }

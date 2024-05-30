@@ -13,8 +13,11 @@ public class ArticleServiceGrpcImpl extends ReactorArticleServiceGrpc.ArticleSer
     public Mono<CreateArticleResponse> createArticle(Mono<CreateArticleRequest> request) {
         // write your own logic here
         log.info("Inside createArticle service");
-        return Mono.just(CreateArticleResponse.newBuilder().setArticle(Article.newBuilder().setId(3L).setTitle("Streamlining Development: Constructing a gRPC Gradle Spring WebFlux Project").setAuthor("KKH CHTH").setCategory("GRPC-GRADLE-REACTIVE").build()).build());
-    }
+       return request.map(req->CreateArticleResponse.newBuilder().setArticle(Article.newBuilder()
+                .setAuthor(req.getArticle().getAuthor())
+                        .setCategory(req.getArticle().getCategory()).setTitle(req.getArticle().getTitle()).setId(req.getArticle().getId())
+                .build()).build());
+        }
 
     @Override
     public Mono<GetArticleByIdResponse> getArticleById(Mono<GetArticleByIdRequest> request) {

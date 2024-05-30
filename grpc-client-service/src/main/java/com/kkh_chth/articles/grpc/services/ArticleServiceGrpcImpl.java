@@ -2,9 +2,7 @@ package com.kkh_chth.articles.grpc.services;
 
 
 import com.kkh_chth.articles.grpc.ArticleJson;
-import com.kkh_chth.articles.grpc.proto.Empty;
-import com.kkh_chth.articles.grpc.proto.GetAllArticlesResponse;
-import com.kkh_chth.articles.grpc.proto.ReactorArticleServiceGrpc;
+import com.kkh_chth.articles.grpc.proto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,5 +29,19 @@ public class ArticleServiceGrpcImpl {
                                .author(article.getAuthor())
                                .build())
                        .collect(toList()));
+    }
+
+    public Mono<ArticleJson> createArticle(ArticleJson articleJson){
+        return serviceStub.createArticle(Mono.just(CreateArticleRequest.newBuilder()
+                .setArticle(Article.newBuilder().setTitle(articleJson.getTitle())
+                        .setCategory(articleJson.getCategory())
+                        .setAuthor(articleJson.getAuthor())
+                        .setId(articleJson.getId())
+                        .build()).build())).map(article-> ArticleJson.builder()
+                .author(article.getArticle().getAuthor())
+                .category(article.getArticle().getCategory())
+                .id(article.getArticle().getId())
+                .title(article.getArticle().getTitle())
+               .build());
     }
 }

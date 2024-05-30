@@ -5,3 +5,7 @@ grpc:
   server:
     port: 9191
 
+grpc-server:
+  host: localhost
+  port: 9090
+
