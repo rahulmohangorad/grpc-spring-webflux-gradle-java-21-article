@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import reactor.core.publisher.Mono;
 
+
 @GrpcService
 @Slf4j
 public class ArticleServiceGrpcImpl extends ReactorArticleServiceGrpc.ArticleServiceImplBase {
